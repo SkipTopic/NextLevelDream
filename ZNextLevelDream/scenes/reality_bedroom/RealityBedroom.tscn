@@ -1,0 +1,199 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://scenes/reality_bedroom/RealityBedroom.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/bg_bedroom.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/art/props/bed.png" id="3_bed"]
+[ext_resource type="Texture2D" path="res://assets/art/props/nightstand.png" id="4_nightstand"]
+[ext_resource type="Texture2D" path="res://assets/art/props/desk.png" id="5_desk"]
+[ext_resource type="Texture2D" path="res://assets/art/props/bookshelf.png" id="6_bookshelf"]
+[ext_resource type="Texture2D" path="res://assets/art/props/door.png" id="7_door"]
+[ext_resource type="Texture2D" path="res://assets/art/props/rug.png" id="8_rug"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="9_player"]
+[ext_resource type="Script" path="res://scripts/Interactable.gd" id="10_interactable"]
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_main"]
+size = Vector2(1920, 470)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_left"]
+size = Vector2(10, 620)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_right"]
+size = Vector2(10, 620)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_bottom"]
+size = Vector2(1920, 10)
+
+[sub_resource type="RectangleShape2D" id="Rect_bed_body"]
+size = Vector2(300, 110)
+
+[sub_resource type="RectangleShape2D" id="Rect_bed_interact"]
+size = Vector2(400, 320)
+
+[sub_resource type="RectangleShape2D" id="Rect_night_body"]
+size = Vector2(130, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_night_interact"]
+size = Vector2(200, 180)
+
+[sub_resource type="RectangleShape2D" id="Rect_desk_body"]
+size = Vector2(330, 100)
+
+[sub_resource type="RectangleShape2D" id="Rect_desk_interact"]
+size = Vector2(420, 260)
+
+[sub_resource type="RectangleShape2D" id="Rect_bookshelf_body"]
+size = Vector2(180, 270)
+
+[sub_resource type="RectangleShape2D" id="Rect_bookshelf_interact"]
+size = Vector2(240, 320)
+
+[sub_resource type="RectangleShape2D" id="Rect_door_interact"]
+size = Vector2(220, 290)
+
+[node name="RealityBedroom" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_script")
+
+[node name="Background" type="Sprite2D" parent="."]
+centered = false
+texture = ExtResource("2_bg")
+
+[node name="Rug" type="Sprite2D" parent="."]
+position = Vector2(960, 940)
+texture = ExtResource("8_rug")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="WallTop" type="CollisionShape2D" parent="Walls"]
+position = Vector2(960, 235)
+shape = SubResource("Rect_wall_main")
+
+[node name="WallLeft" type="CollisionShape2D" parent="Walls"]
+position = Vector2(5, 770)
+shape = SubResource("Rect_wall_left")
+
+[node name="WallRight" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1915, 770)
+shape = SubResource("Rect_wall_right")
+
+[node name="WallBottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(960, 1075)
+shape = SubResource("Rect_wall_bottom")
+
+[node name="Furniture" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Bed" type="Node2D" parent="Furniture"]
+position = Vector2(380, 560)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Bed"]
+texture = ExtResource("3_bed")
+
+[node name="Body" type="StaticBody2D" parent="Furniture/Bed"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Bed/Body"]
+position = Vector2(0, 80)
+shape = SubResource("Rect_bed_body")
+
+[node name="Interactable" type="Area2D" parent="Furniture/Bed"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_interactable")
+hint_text = "睡觉"
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Bed/Interactable"]
+position = Vector2(0, 40)
+shape = SubResource("Rect_bed_interact")
+
+[node name="Nightstand" type="Node2D" parent="Furniture"]
+position = Vector2(700, 560)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Nightstand"]
+texture = ExtResource("4_nightstand")
+
+[node name="Body" type="StaticBody2D" parent="Furniture/Nightstand"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Nightstand/Body"]
+position = Vector2(0, 55)
+shape = SubResource("Rect_night_body")
+
+[node name="Interactable" type="Area2D" parent="Furniture/Nightstand"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_interactable")
+hint_text = "台灯"
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Nightstand/Interactable"]
+position = Vector2(0, 30)
+shape = SubResource("Rect_night_interact")
+
+[node name="Desk" type="Node2D" parent="Furniture"]
+position = Vector2(1500, 600)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Desk"]
+texture = ExtResource("5_desk")
+
+[node name="Body" type="StaticBody2D" parent="Furniture/Desk"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Desk/Body"]
+position = Vector2(0, 55)
+shape = SubResource("Rect_desk_body")
+
+[node name="Interactable" type="Area2D" parent="Furniture/Desk"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_interactable")
+hint_text = "写日记"
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Desk/Interactable"]
+position = Vector2(0, 50)
+shape = SubResource("Rect_desk_interact")
+
+[node name="Bookshelf" type="Node2D" parent="Furniture"]
+position = Vector2(1810, 500)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Bookshelf"]
+texture = ExtResource("6_bookshelf")
+
+[node name="Body" type="StaticBody2D" parent="Furniture/Bookshelf"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Bookshelf/Body"]
+shape = SubResource("Rect_bookshelf_body")
+
+[node name="Interactable" type="Area2D" parent="Furniture/Bookshelf"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_interactable")
+hint_text = "书架"
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Bookshelf/Interactable"]
+shape = SubResource("Rect_bookshelf_interact")
+
+[node name="Door" type="Node2D" parent="Furniture"]
+position = Vector2(1230, 350)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Door"]
+texture = ExtResource("7_door")
+
+[node name="Interactable" type="Area2D" parent="Furniture/Door"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_interactable")
+hint_text = "开门"
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Door/Interactable"]
+position = Vector2(0, 30)
+shape = SubResource("Rect_door_interact")
+
+[node name="Player" parent="." instance=ExtResource("9_player")]
+position = Vector2(960, 860)

@@ -1,0 +1,210 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scenes/dream2_hospital_inside/HospitalInside.gd" id="1_hin"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/bg_hospital_inside.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/art/props/reception.png" id="3_reception"]
+[ext_resource type="Texture2D" path="res://assets/art/props/bench.png" id="4_bench"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="5_player"]
+[ext_resource type="Script" path="res://scripts/Interactable.gd" id="6_interactable"]
+
+[sub_resource type="RectangleShape2D" id="Rect_border_top"]
+size = Vector2(2880, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_border_bottom"]
+size = Vector2(2880, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_border_left"]
+size = Vector2(80, 1620)
+
+[sub_resource type="RectangleShape2D" id="Rect_border_right"]
+size = Vector2(80, 1620)
+
+[sub_resource type="RectangleShape2D" id="Rect_exit_interact"]
+size = Vector2(340, 260)
+
+[sub_resource type="RectangleShape2D" id="Rect_reception_body"]
+size = Vector2(380, 120)
+
+[sub_resource type="RectangleShape2D" id="Rect_reception_interact"]
+size = Vector2(460, 280)
+
+[sub_resource type="RectangleShape2D" id="Rect_bench_body"]
+size = Vector2(220, 90)
+
+[sub_resource type="RectangleShape2D" id="Rect_passage_interact"]
+size = Vector2(300, 420)
+
+[sub_resource type="RectangleShape2D" id="Rect_door_interact"]
+size = Vector2(200, 380)
+
+[node name="HospitalInside" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_hin")
+
+[node name="Background" type="Sprite2D" parent="."]
+centered = false
+texture = ExtResource("2_bg")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="BorderTop" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1440, -40)
+shape = SubResource("Rect_border_top")
+
+[node name="BorderBottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1440, 1660)
+shape = SubResource("Rect_border_bottom")
+
+[node name="BorderLeft" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-40, 810)
+shape = SubResource("Rect_border_left")
+
+[node name="BorderRight" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2920, 810)
+shape = SubResource("Rect_border_right")
+
+[node name="Props" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Reception" type="Node2D" parent="Props"]
+position = Vector2(1440, 950)
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/Reception"]
+texture = ExtResource("3_reception")
+
+[node name="Body" type="StaticBody2D" parent="Props/Reception"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Reception/Body"]
+position = Vector2(0, 40)
+shape = SubResource("Rect_reception_body")
+
+[node name="Interactable" type="Area2D" parent="Props/Reception"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "接诊台"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Reception/Interactable"]
+shape = SubResource("Rect_reception_interact")
+
+[node name="BenchA" type="Node2D" parent="Props"]
+position = Vector2(700, 520)
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/BenchA"]
+texture = ExtResource("4_bench")
+
+[node name="Body" type="StaticBody2D" parent="Props/BenchA"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Props/BenchA/Body"]
+position = Vector2(0, 30)
+shape = SubResource("Rect_bench_body")
+
+[node name="BenchB" type="Node2D" parent="Props"]
+position = Vector2(1010, 520)
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/BenchB"]
+texture = ExtResource("4_bench")
+
+[node name="Body" type="StaticBody2D" parent="Props/BenchB"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Props/BenchB/Body"]
+position = Vector2(0, 30)
+shape = SubResource("Rect_bench_body")
+
+[node name="BenchC" type="Node2D" parent="Props"]
+position = Vector2(780, 700)
+scale = Vector2(0.75, 0.75)
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/BenchC"]
+texture = ExtResource("4_bench")
+
+[node name="Body" type="StaticBody2D" parent="Props/BenchC"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Props/BenchC/Body"]
+position = Vector2(0, 30)
+shape = SubResource("Rect_bench_body")
+
+[node name="ExitDoor" type="Node2D" parent="Props"]
+position = Vector2(1440, 1470)
+
+[node name="Interactable" type="Area2D" parent="Props/ExitDoor"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "走出医院"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/ExitDoor/Interactable"]
+shape = SubResource("Rect_exit_interact")
+
+[node name="Passage3" type="Node2D" parent="Props"]
+position = Vector2(1440, 380)
+
+[node name="Interactable" type="Area2D" parent="Props/Passage3"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "3号通道"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Passage3/Interactable"]
+shape = SubResource("Rect_passage_interact")
+
+[node name="Passage2" type="Node2D" parent="Props"]
+position = Vector2(160, 980)
+
+[node name="Interactable" type="Area2D" parent="Props/Passage2"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "2号通道"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Passage2/Interactable"]
+shape = SubResource("Rect_passage_interact")
+
+[node name="Passage1" type="Node2D" parent="Props"]
+position = Vector2(2720, 980)
+
+[node name="Interactable" type="Area2D" parent="Props/Passage1"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "1号通道"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Passage1/Interactable"]
+shape = SubResource("Rect_passage_interact")
+
+[node name="DoorA" type="Node2D" parent="Props"]
+position = Vector2(2205, 480)
+
+[node name="Interactable" type="Area2D" parent="Props/DoorA"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "门"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/DoorA/Interactable"]
+shape = SubResource("Rect_door_interact")
+
+[node name="DoorB" type="Node2D" parent="Props"]
+position = Vector2(2525, 480)
+
+[node name="Interactable" type="Area2D" parent="Props/DoorB"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "门"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/DoorB/Interactable"]
+shape = SubResource("Rect_door_interact")
+
+[node name="Player" parent="." instance=ExtResource("5_player")]
+position = Vector2(1440, 1250)

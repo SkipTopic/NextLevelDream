@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://dy778yxfcygqu"]
+
+[ext_resource type="Script" uid="uid://cjmgwyoqd11ey" path="res://scenes/intro/Intro.gd" id="1_intro"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+content_margin_left = 46.0
+content_margin_top = 14.0
+content_margin_right = 46.0
+content_margin_bottom = 14.0
+bg_color = Color(0.1, 0.04, 0.13, 0.85)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.72, 0.28, 0.52, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+content_margin_left = 46.0
+content_margin_top = 14.0
+content_margin_right = 46.0
+content_margin_bottom = 14.0
+bg_color = Color(0.18, 0.09, 0.23, 0.9)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.96, 0.66, 0.82, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+content_margin_left = 46.0
+content_margin_top = 14.0
+content_margin_right = 46.0
+content_margin_bottom = 14.0
+bg_color = Color(0.17, 0.07, 0.21, 0.9)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.52, 0.72, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Intro" type="CanvasLayer" unique_id=1626205453]
+script = ExtResource("1_intro")
+
+[node name="Root" type="Control" parent="." unique_id=1989069532]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="Root" unique_id=183890275]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.02, 0.02, 0.04, 1)
+
+[node name="TitleLabel" type="Label" parent="Root" unique_id=1004951844]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 200.0
+offset_bottom = 320.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 96
+text = "梦日记"
+horizontal_alignment = 1
+
+[node name="BodyLabel" type="Label" parent="Root" unique_id=1118948336]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -180.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.78, 0.78, 0.84, 1)
+theme_override_font_sizes/font_size = 38
+text = "这是我的房间。桌上还有写了一半的日记。
+
+靠近床，按下 Z 就可以去梦里走一走。
+
+梦里会有奇怪的入口。
+
+按住 Q 就能把自己捏醒——只是在梦里罢了。"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HintLabel" type="Label" parent="Root" unique_id=1541534455]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.9, 1)
+theme_override_font_sizes/font_size = 36
+text = "按 Z / 空格 / Enter 或点下方按钮继续"
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="Root" unique_id=403258076]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -138.0
+offset_top = -271.0
+offset_right = 142.0
+offset_bottom = -193.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.93, 0.82, 0.88, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.72, 0.86, 1)
+theme_override_colors/font_hover_color = Color(0.96, 0.66, 0.82, 1)
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_btn_pressed")
+text = "继  续"

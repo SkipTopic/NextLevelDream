@@ -1,0 +1,97 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://scenes/dream1_meteor_world/Dream1MeteorWorld.gd" id="1_mw"]
+[ext_resource type="Script" path="res://scenes/dream1_meteor_world/MeteorSpawner.gd" id="2_spawner"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/bg_meteor_world.png" id="3_bg"]
+[ext_resource type="Texture2D" path="res://assets/art/props/portal.png" id="4_portal"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="5_player"]
+[ext_resource type="Script" path="res://scripts/Interactable.gd" id="6_interactable"]
+[ext_resource type="Script" path="res://scripts/WakeUpComponent.gd" id="7_wakeup"]
+[ext_resource type="Texture2D" path="res://assets/art/props/pills.png" id="8_pills"]
+
+[sub_resource type="RectangleShape2D" id="Rect_border_top"]
+size = Vector2(2880, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_border_bottom"]
+size = Vector2(2880, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_border_left"]
+size = Vector2(80, 1620)
+
+[sub_resource type="RectangleShape2D" id="Rect_border_right"]
+size = Vector2(80, 1620)
+
+[sub_resource type="RectangleShape2D" id="Rect_portal_interact"]
+size = Vector2(220, 280)
+
+[sub_resource type="RectangleShape2D" id="Rect_pills_interact"]
+size = Vector2(220, 220)
+
+[node name="Dream1MeteorWorld" type="Node2D"]
+script = ExtResource("1_mw")
+
+[node name="Background" type="Sprite2D" parent="."]
+centered = false
+texture = ExtResource("3_bg")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="BorderTop" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1440, -40)
+shape = SubResource("Rect_border_top")
+
+[node name="BorderBottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1440, 1660)
+shape = SubResource("Rect_border_bottom")
+
+[node name="BorderLeft" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-40, 810)
+shape = SubResource("Rect_border_left")
+
+[node name="BorderRight" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2920, 810)
+shape = SubResource("Rect_border_right")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Portal" type="Node2D" parent="Props"]
+position = Vector2(1440, 1480)
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/Portal"]
+texture = ExtResource("4_portal")
+
+[node name="Interactable" type="Area2D" parent="Props/Portal"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "回到主通道"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Portal/Interactable"]
+position = Vector2(0, 20)
+shape = SubResource("Rect_portal_interact")
+
+[node name="Pills" type="Node2D" parent="Props"]
+position = Vector2(2300, 640)
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/Pills"]
+texture = ExtResource("8_pills")
+
+[node name="Interactable" type="Area2D" parent="Props/Pills"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "陨石坑边有个小药瓶"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Pills/Interactable"]
+shape = SubResource("Rect_pills_interact")
+
+[node name="MeteorSpawner" type="Node2D" parent="."]
+script = ExtResource("2_spawner")
+
+[node name="Player" parent="." instance=ExtResource("5_player")]
+position = Vector2(1440, 1400)
+
+[node name="WakeUp" type="Node" parent="."]
+script = ExtResource("7_wakeup")

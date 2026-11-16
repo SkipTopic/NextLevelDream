@@ -1,0 +1,139 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scenes/main_menu/MainMenu.gd" id="1_menu"]
+[ext_resource type="Shader" path="res://assets/shaders/fireflies.gdshader" id="2_fireflies"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMat_fireflies"]
+shader = ExtResource("2_fireflies")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4"]
+
+[node name="MainMenu" type="CanvasLayer"]
+layer = 1
+script = ExtResource("1_menu")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.02, 0.02, 0.04, 1)
+
+[node name="Fireflies" type="ColorRect" parent="Root"]
+material = SubResource("ShaderMat_fireflies")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TitleLabel" type="Label" parent="Root"]
+layout_mode = 1
+offset_left = 96.0
+offset_top = 180.0
+offset_right = 960.0
+offset_bottom = 280.0
+theme_override_font_sizes/font_size = 90
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "NEXT LEVEL DREAM"
+
+[node name="SubtitleLabel" type="Label" parent="Root"]
+layout_mode = 1
+offset_left = 96.0
+offset_top = 300.0
+offset_right = 960.0
+offset_bottom = 380.0
+theme_override_font_sizes/font_size = 60
+theme_override_colors/font_color = Color(0.8, 0.78, 0.86, 1)
+text = "梦日记 / Yume Nikki tribute"
+
+[node name="DescriptionLabel" type="Label" parent="Root"]
+layout_mode = 1
+offset_left = 96.0
+offset_top = 410.0
+offset_right = 1100.0
+offset_bottom = 700.0
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.65, 0.62, 0.72, 1)
+text = "方向键移动  ·  按 Z 或空格 调査
+在梦境里 按 Q 捏脸醒来
+只要记得把梦写进日记"
+
+[node name="Options" type="VBoxContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -210.0
+offset_right = -100.0
+offset_bottom = 210.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="StartButton" type="Button" parent="Root/Options"]
+layout_mode = 2
+focus_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4")
+theme_override_colors/font_color = Color(0.55, 0.55, 0.6, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 56
+text = "　开始做梦"
+alignment = 2
+
+[node name="LoadButton" type="Button" parent="Root/Options"]
+layout_mode = 2
+focus_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4")
+theme_override_colors/font_color = Color(0.55, 0.55, 0.6, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 56
+text = "　阅读日记"
+alignment = 2
+
+[node name="QuitButton" type="Button" parent="Root/Options"]
+layout_mode = 2
+focus_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4")
+theme_override_colors/font_color = Color(0.55, 0.55, 0.6, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 56
+text = "　离开"
+alignment = 2

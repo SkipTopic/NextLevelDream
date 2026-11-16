@@ -1,0 +1,114 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scenes/dream2_street/Street.gd" id="1_street"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/bg_street.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/art/props/scooter_world.png" id="3_scooter"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="4_player"]
+[ext_resource type="Script" path="res://scripts/Interactable.gd" id="5_interactable"]
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_top"]
+size = Vector2(3840, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_bottom"]
+size = Vector2(3840, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_left"]
+size = Vector2(80, 1620)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_cliff"]
+size = Vector2(80, 1620)
+
+[sub_resource type="RectangleShape2D" id="Rect_cliff_interact"]
+size = Vector2(420, 460)
+
+[sub_resource type="RectangleShape2D" id="Rect_scooter_interact"]
+size = Vector2(220, 220)
+
+[sub_resource type="RectangleShape2D" id="Rect_hospital_door_interact"]
+size = Vector2(340, 280)
+
+[sub_resource type="RectangleShape2D" id="Rect_rail_entrance_interact"]
+size = Vector2(260, 300)
+
+[node name="Street" type="Node2D"]
+script = ExtResource("1_street")
+
+[node name="Background" type="Sprite2D" parent="."]
+centered = false
+texture = ExtResource("2_bg")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="BorderTop" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1920, -40)
+shape = SubResource("Rect_wall_top")
+
+[node name="BorderBottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1920, 1660)
+shape = SubResource("Rect_wall_bottom")
+
+[node name="BorderLeft" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-40, 810)
+shape = SubResource("Rect_wall_left")
+
+[node name="CliffWall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(3660, 810)
+shape = SubResource("Rect_wall_cliff")
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Scooter" type="Node2D" parent="Props"]
+position = Vector2(2600, 1120)
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/Scooter"]
+texture = ExtResource("3_scooter")
+
+[node name="Interactable" type="Area2D" parent="Props/Scooter"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_interactable")
+hint_text = "停在路边的电瓶车"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Scooter/Interactable"]
+shape = SubResource("Rect_scooter_interact")
+
+[node name="CliffEdge" type="Node2D" parent="Props"]
+position = Vector2(3520, 1150)
+
+[node name="Interactable" type="Area2D" parent="Props/CliffEdge"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_interactable")
+hint_text = "跳下去"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/CliffEdge/Interactable"]
+shape = SubResource("Rect_cliff_interact")
+
+[node name="HospitalDoor" type="Node2D" parent="Props"]
+position = Vector2(1970, 1420)
+
+[node name="Interactable" type="Area2D" parent="Props/HospitalDoor"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_interactable")
+hint_text = "医院入口"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/HospitalDoor/Interactable"]
+shape = SubResource("Rect_hospital_door_interact")
+
+[node name="RailEntrance" type="Node2D" parent="Props"]
+position = Vector2(120, 1150)
+
+[node name="Interactable" type="Area2D" parent="Props/RailEntrance"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_interactable")
+hint_text = "回铁轨"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/RailEntrance/Interactable"]
+shape = SubResource("Rect_rail_entrance_interact")
+
+[node name="Player" parent="." instance=ExtResource("4_player")]
+position = Vector2(400, 1150)

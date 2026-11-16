@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://cspia8gt8vd7v"]
+
+[ext_resource type="Script" uid="uid://cwgkxqvyrp1ee" path="res://scenes/dream2_rail_world/Dream2RailWorld.gd" id="1_rail"]
+[ext_resource type="Texture2D" uid="uid://byw8ycv8cnbqx" path="res://assets/art/backgrounds/bg_rail_world.png" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://do6rs7biqpqr2" path="res://assets/art/props/booth.png" id="3_booth"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="5_player"]
+[ext_resource type="Script" uid="uid://u2qohqnc32hp" path="res://scripts/Interactable.gd" id="6_interactable"]
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_top"]
+size = Vector2(5760, 1001)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_bottom"]
+size = Vector2(5760, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_right"]
+size = Vector2(80, 1620)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_cliff"]
+size = Vector2(295, 1620)
+
+[sub_resource type="RectangleShape2D" id="Rect_booth_body"]
+size = Vector2(480, 482)
+
+[sub_resource type="RectangleShape2D" id="Rect_booth_door_interact"]
+size = Vector2(220, 357)
+
+[sub_resource type="RectangleShape2D" id="Rect_street_entrance_interact"]
+size = Vector2(300, 300)
+
+[sub_resource type="RectangleShape2D" id="Rect_cliff_interact"]
+size = Vector2(420, 460)
+
+[node name="Dream2RailWorld" type="Node2D" unique_id=58304182]
+script = ExtResource("1_rail")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1462709858]
+texture = ExtResource("2_bg")
+centered = false
+
+[node name="Walls" type="StaticBody2D" parent="." unique_id=454053047]
+collision_mask = 0
+
+[node name="BorderTop" type="CollisionShape2D" parent="Walls" unique_id=1784824871]
+position = Vector2(2880, 420.5)
+shape = SubResource("Rect_wall_top")
+
+[node name="BorderBottom" type="CollisionShape2D" parent="Walls" unique_id=221944878]
+position = Vector2(2880, 1660)
+shape = SubResource("Rect_wall_bottom")
+
+[node name="BorderRight" type="CollisionShape2D" parent="Walls" unique_id=615329196]
+position = Vector2(5800, 810)
+shape = SubResource("Rect_wall_right")
+
+[node name="CliffWall" type="CollisionShape2D" parent="Walls" unique_id=1705738081]
+position = Vector2(167.5, 810)
+shape = SubResource("Rect_wall_cliff")
+
+[node name="Props" type="Node2D" parent="." unique_id=1217461593]
+
+[node name="Booth" type="Node2D" parent="Props" unique_id=550968508]
+position = Vector2(5160, 600)
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/Booth" unique_id=588671615]
+texture = ExtResource("3_booth")
+centered = false
+
+[node name="Body" type="StaticBody2D" parent="Props/Booth" unique_id=1111099835]
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Booth/Body" unique_id=1671496891]
+position = Vector2(240, 241)
+shape = SubResource("Rect_booth_body")
+
+[node name="Door" type="Node2D" parent="Props/Booth" unique_id=90298119]
+position = Vector2(360, 350)
+
+[node name="Interactable" type="Area2D" parent="Props/Booth/Door" unique_id=1170386079]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "进入保安室"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Booth/Door/Interactable" unique_id=1865389687]
+position = Vector2(0, 58.5)
+shape = SubResource("Rect_booth_door_interact")
+
+[node name="StreetEntrance" type="Node2D" parent="Props" unique_id=2145703941]
+position = Vector2(4940, 1150)
+
+[node name="Interactable" type="Area2D" parent="Props/StreetEntrance" unique_id=2154704951]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "去大街"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/StreetEntrance/Interactable" unique_id=2164705961]
+shape = SubResource("Rect_street_entrance_interact")
+
+[node name="CliffEdge" type="Node2D" parent="Props" unique_id=1219551902]
+position = Vector2(240, 1150)
+
+[node name="Interactable" type="Area2D" parent="Props/CliffEdge" unique_id=1272377033]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "跳下去"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/CliffEdge/Interactable" unique_id=1898221552]
+shape = SubResource("Rect_cliff_interact")
+
+[node name="Player" parent="." unique_id=583819414 instance=ExtResource("5_player")]
+position = Vector2(900, 1150)

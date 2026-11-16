@@ -1,0 +1,19 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+export_presets.cfg
+
+# 导入产物与运行时临时文件
+*.translation
+*.tmp
+*.log
+
+# Mono（本项目纯 GDScript，防御性忽略）
+.mono/
+data_*/
+mono_crash.*.json
+
+# 系统垃圾文件
+.DS_Store
+Thumbs.db
+desktop.ini

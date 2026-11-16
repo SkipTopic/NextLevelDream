@@ -1,0 +1,197 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/BackpackUI.gd" id="1_backpack"]
+
+[sub_resource type="StyleBoxFlat" id="sb_window"]
+bg_color = Color(0.04, 0.02, 0.05, 0.970000)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.72, 0.28, 0.52, 1)
+
+[sub_resource type="StyleBoxFlat" id="sb_panel"]
+bg_color = Color(0.06, 0.03, 0.08, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.42, 0.18, 0.32, 1)
+
+[sub_resource type="StyleBoxFlat" id="sb_btn_normal"]
+content_margin_left = 28.0
+content_margin_top = 10.0
+content_margin_right = 28.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1, 0.04, 0.13, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.72, 0.28, 0.52, 1)
+
+[sub_resource type="StyleBoxFlat" id="sb_btn_hover"]
+content_margin_left = 28.0
+content_margin_top = 10.0
+content_margin_right = 28.0
+content_margin_bottom = 10.0
+bg_color = Color(0.17, 0.07, 0.21, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.52, 0.72, 1)
+
+[sub_resource type="StyleBoxFlat" id="sb_btn_pressed"]
+content_margin_left = 28.0
+content_margin_top = 10.0
+content_margin_right = 28.0
+content_margin_bottom = 10.0
+bg_color = Color(0.18, 0.09, 0.23, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.96, 0.66, 0.82, 1)
+
+[sub_resource type="StyleBoxFlat" id="sb_btn_disabled"]
+content_margin_left = 28.0
+content_margin_top = 10.0
+content_margin_right = 28.0
+content_margin_bottom = 10.0
+bg_color = Color(0.06, 0.03, 0.08, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.26, 0.12, 0.2, 1)
+
+[node name="BackpackUI" type="CanvasLayer"]
+process_mode = 3
+layer = 90
+script = ExtResource("1_backpack")
+
+[node name="Dim" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="Window" type="Panel" parent="."]
+offset_left = 280.0
+offset_top = 110.0
+offset_right = 1640.0
+offset_bottom = 970.0
+theme_override_styles/panel = SubResource("sb_window")
+
+[node name="CloseButton" type="Button" parent="Window"]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 84.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(0.93, 0.82, 0.88, 1)
+theme_override_colors/font_hover_color = Color(0.96, 0.66, 0.82, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.72, 0.86, 1)
+theme_override_styles/normal = SubResource("sb_btn_normal")
+theme_override_styles/hover = SubResource("sb_btn_hover")
+theme_override_styles/pressed = SubResource("sb_btn_pressed")
+theme_override_styles/hover_pressed = SubResource("sb_btn_pressed")
+theme_override_styles/focus = SubResource("sb_btn_pressed")
+text = "✕"
+
+[node name="GridPanel" type="Panel" parent="Window"]
+offset_left = 24.0
+offset_top = 108.0
+offset_right = 632.0
+offset_bottom = 836.0
+theme_override_styles/panel = SubResource("sb_panel")
+
+[node name="Grid" type="GridContainer" parent="Window/GridPanel"]
+offset_left = 20.0
+offset_top = 24.0
+offset_right = 588.0
+offset_bottom = 592.0
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 4
+
+[node name="CounterLabel" type="Label" parent="Window/GridPanel"]
+offset_left = 20.0
+offset_top = 620.0
+offset_right = 588.0
+offset_bottom = 700.0
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color = Color(0.72, 0.6, 0.67, 1)
+text = "收集 0 / 16"
+vertical_alignment = 1
+
+[node name="ImagePanel" type="Panel" parent="Window"]
+offset_left = 656.0
+offset_top = 108.0
+offset_right = 1336.0
+offset_bottom = 452.0
+theme_override_styles/panel = SubResource("sb_panel")
+
+[node name="ImageRect" type="TextureRect" parent="Window/ImagePanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DescPanel" type="Panel" parent="Window"]
+offset_left = 656.0
+offset_top = 476.0
+offset_right = 1336.0
+offset_bottom = 836.0
+theme_override_styles/panel = SubResource("sb_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Window/DescPanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="NameLabel" type="Label" parent="Window/DescPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+theme_override_colors/font_color = Color(0.96, 0.62, 0.8, 1)
+text = "—"
+
+[node name="DescLabel" type="Label" parent="Window/DescPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.93, 0.82, 0.88, 1)
+text = "还没有收集到任何东西。"
+autowrap_mode = 3
+
+[node name="EquipButton" type="Button" parent="Window/DescPanel/VBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(0.93, 0.82, 0.88, 1)
+theme_override_colors/font_hover_color = Color(0.96, 0.66, 0.82, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.72, 0.86, 1)
+theme_override_colors/font_disabled_color = Color(0.45, 0.36, 0.41, 1)
+theme_override_styles/normal = SubResource("sb_btn_normal")
+theme_override_styles/hover = SubResource("sb_btn_hover")
+theme_override_styles/pressed = SubResource("sb_btn_pressed")
+theme_override_styles/hover_pressed = SubResource("sb_btn_pressed")
+theme_override_styles/disabled = SubResource("sb_btn_disabled")
+text = "装备"

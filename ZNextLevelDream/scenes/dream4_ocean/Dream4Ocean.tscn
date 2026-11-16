@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bobjf6q4co7m4"]
+
+[ext_resource type="Script" uid="uid://c58lmoyosyahv" path="res://scenes/dream4_ocean/Dream4Ocean.gd" id="1_ocean"]
+[ext_resource type="Shader" uid="uid://bec3sbdip8rs0" path="res://assets/shaders/ocean_water.gdshader" id="2_shader"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="3_player"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMat_water"]
+shader = ExtResource("2_shader")
+shader_parameter/wave_speed = 0.2890000137275
+shader_parameter/deep_color = Color(0.05, 0.17, 0.32, 1)
+shader_parameter/shallow_color = Color(0.12, 0.33, 0.52, 1)
+shader_parameter/crest_color = Color(0.62, 0.8, 0.92, 1)
+shader_parameter/crest_density = 0.0930000044175
+shader_parameter/sparkle_strength = 0.7450000353875
+
+[node name="Dream4Ocean" type="Node2D" unique_id=1186353865]
+script = ExtResource("1_ocean")
+
+[node name="Water" type="ColorRect" parent="." unique_id=24730673]
+material = SubResource("ShaderMat_water")
+offset_right = 2880.0
+offset_bottom = 1620.0
+mouse_filter = 2
+
+[node name="Player" parent="." unique_id=1382380702 instance=ExtResource("3_player")]
+position = Vector2(1440, 900)

@@ -1,0 +1,229 @@
+[gd_scene load_steps=29 format=3]
+
+[ext_resource type="Script" path="res://scenes/dream1_nexus/Dream1Nexus.gd" id="1_nexus"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/bg_dream_world.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/art/props/door_red.png" id="3_door_red"]
+[ext_resource type="Texture2D" path="res://assets/art/props/door_green.png" id="4_door_green"]
+[ext_resource type="Texture2D" path="res://assets/art/props/door_blue.png" id="5_door_blue"]
+[ext_resource type="Texture2D" path="res://assets/art/props/door_yellow.png" id="6_door_yellow"]
+[ext_resource type="Texture2D" path="res://assets/art/props/monolith.png" id="7_monolith"]
+[ext_resource type="Texture2D" path="res://assets/art/props/portal.png" id="8_portal"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="9_player"]
+[ext_resource type="Script" path="res://scripts/Interactable.gd" id="10_interactable"]
+[ext_resource type="Script" path="res://scripts/WakeUpComponent.gd" id="11_wakeup"]
+
+[sub_resource type="RectangleShape2D" id="Rect_border_top"]
+size = Vector2(2880, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_border_bottom"]
+size = Vector2(2880, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_border_left"]
+size = Vector2(80, 1620)
+
+[sub_resource type="RectangleShape2D" id="Rect_border_right"]
+size = Vector2(80, 1620)
+
+[sub_resource type="RectangleShape2D" id="Rect_door_body"]
+size = Vector2(160, 260)
+
+[sub_resource type="RectangleShape2D" id="Rect_door_interact"]
+size = Vector2(220, 300)
+
+[sub_resource type="RectangleShape2D" id="Rect_monolith_body"]
+size = Vector2(160, 260)
+
+[sub_resource type="RectangleShape2D" id="Rect_monolith_interact"]
+size = Vector2(220, 320)
+
+[sub_resource type="RectangleShape2D" id="Rect_portal_interact"]
+size = Vector2(220, 280)
+
+[node name="Dream1Nexus" type="Node2D"]
+script = ExtResource("1_nexus")
+
+[node name="Background" type="Sprite2D" parent="."]
+centered = false
+texture = ExtResource("2_bg")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="BorderTop" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1440, -40)
+shape = SubResource("Rect_border_top")
+
+[node name="BorderBottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1440, 1660)
+shape = SubResource("Rect_border_bottom")
+
+[node name="BorderLeft" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-40, 810)
+shape = SubResource("Rect_border_left")
+
+[node name="BorderRight" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2920, 810)
+shape = SubResource("Rect_border_right")
+
+[node name="Decors" type="Node2D" parent="."]
+
+[node name="MonolithA" type="Node2D" parent="Decors"]
+position = Vector2(480, 1280)
+
+[node name="Sprite2D" type="Sprite2D" parent="Decors/MonolithA"]
+texture = ExtResource("7_monolith")
+
+[node name="Body" type="StaticBody2D" parent="Decors/MonolithA"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decors/MonolithA/Body"]
+shape = SubResource("Rect_monolith_body")
+
+[node name="Interactable" type="Area2D" parent="Decors/MonolithA"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_interactable")
+hint_text = "石碑"
+
+[node name="Shape" type="CollisionShape2D" parent="Decors/MonolithA/Interactable"]
+shape = SubResource("Rect_monolith_interact")
+
+[node name="MonolithB" type="Node2D" parent="Decors"]
+position = Vector2(2400, 1280)
+
+[node name="Sprite2D" type="Sprite2D" parent="Decors/MonolithB"]
+texture = ExtResource("7_monolith")
+
+[node name="Body" type="StaticBody2D" parent="Decors/MonolithB"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decors/MonolithB/Body"]
+shape = SubResource("Rect_monolith_body")
+
+[node name="Interactable" type="Area2D" parent="Decors/MonolithB"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_interactable")
+hint_text = "石柱"
+
+[node name="Shape" type="CollisionShape2D" parent="Decors/MonolithB/Interactable"]
+shape = SubResource("Rect_monolith_interact")
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="Meteor" type="Node2D" parent="Doors"]
+position = Vector2(1440, 350)
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/Meteor"]
+texture = ExtResource("3_door_red")
+
+[node name="Body" type="StaticBody2D" parent="Doors/Meteor"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Doors/Meteor/Body"]
+shape = SubResource("Rect_door_body")
+
+[node name="Interactable" type="Area2D" parent="Doors/Meteor"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_interactable")
+hint_text = "流星世界"
+
+[node name="Shape" type="CollisionShape2D" parent="Doors/Meteor/Interactable"]
+position = Vector2(0, 20)
+shape = SubResource("Rect_door_interact")
+
+[node name="Forest" type="Node2D" parent="Doors"]
+position = Vector2(2240, 540)
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/Forest"]
+texture = ExtResource("4_door_green")
+
+[node name="Body" type="StaticBody2D" parent="Doors/Forest"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Doors/Forest/Body"]
+shape = SubResource("Rect_door_body")
+
+[node name="Interactable" type="Area2D" parent="Doors/Forest"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_interactable")
+hint_text = "深林世界"
+
+[node name="Shape" type="CollisionShape2D" parent="Doors/Forest/Interactable"]
+position = Vector2(0, 20)
+shape = SubResource("Rect_door_interact")
+
+[node name="LockedA" type="Node2D" parent="Doors"]
+position = Vector2(2480, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/LockedA"]
+texture = ExtResource("5_door_blue")
+
+[node name="Body" type="StaticBody2D" parent="Doors/LockedA"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Doors/LockedA/Body"]
+shape = SubResource("Rect_door_body")
+
+[node name="Interactable" type="Area2D" parent="Doors/LockedA"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_interactable")
+hint_text = "推开"
+
+[node name="Shape" type="CollisionShape2D" parent="Doors/LockedA/Interactable"]
+position = Vector2(0, 20)
+shape = SubResource("Rect_door_interact")
+
+[node name="LockedB" type="Node2D" parent="Doors"]
+position = Vector2(400, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/LockedB"]
+texture = ExtResource("6_door_yellow")
+
+[node name="Body" type="StaticBody2D" parent="Doors/LockedB"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Doors/LockedB/Body"]
+shape = SubResource("Rect_door_body")
+
+[node name="Interactable" type="Area2D" parent="Doors/LockedB"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_interactable")
+hint_text = "推开"
+
+[node name="Shape" type="CollisionShape2D" parent="Doors/LockedB/Interactable"]
+position = Vector2(0, 20)
+shape = SubResource("Rect_door_interact")
+
+[node name="Portal" type="Node2D" parent="."]
+position = Vector2(1440, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="Portal"]
+texture = ExtResource("8_portal")
+
+[node name="Interactable" type="Area2D" parent="Portal"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_interactable")
+hint_text = "回到梦境卧室"
+
+[node name="Shape" type="CollisionShape2D" parent="Portal/Interactable"]
+position = Vector2(0, 20)
+shape = SubResource("Rect_portal_interact")
+
+[node name="Player" parent="." instance=ExtResource("9_player")]
+position = Vector2(1440, 800)
+
+[node name="WakeUp" type="Node" parent="."]
+script = ExtResource("11_wakeup")

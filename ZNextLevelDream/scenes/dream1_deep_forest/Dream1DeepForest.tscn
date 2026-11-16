@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scenes/dream1_deep_forest/Dream1DeepForest.gd" id="1_df"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/bg_deep_forest.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/art/props/portal.png" id="3_portal"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="4_player"]
+[ext_resource type="Script" path="res://scripts/Interactable.gd" id="5_interactable"]
+[ext_resource type="Script" path="res://scripts/WakeUpComponent.gd" id="6_wakeup"]
+
+[sub_resource type="RectangleShape2D" id="Rect_border_top"]
+size = Vector2(5760, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_border_bottom"]
+size = Vector2(5760, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_border_left"]
+size = Vector2(80, 1620)
+
+[sub_resource type="RectangleShape2D" id="Rect_border_right"]
+size = Vector2(80, 1620)
+
+[sub_resource type="RectangleShape2D" id="Rect_portal_interact"]
+size = Vector2(220, 280)
+
+[node name="Dream1DeepForest" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_df")
+
+[node name="Background" type="Sprite2D" parent="."]
+centered = false
+texture = ExtResource("2_bg")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="BorderTop" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2880, -40)
+shape = SubResource("Rect_border_top")
+
+[node name="BorderBottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2880, 1660)
+shape = SubResource("Rect_border_bottom")
+
+[node name="BorderLeft" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-40, 810)
+shape = SubResource("Rect_border_left")
+
+[node name="BorderRight" type="CollisionShape2D" parent="Walls"]
+position = Vector2(5800, 810)
+shape = SubResource("Rect_border_right")
+
+[node name="Trees" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Portal" type="Node2D" parent="Props"]
+position = Vector2(2880, 1480)
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/Portal"]
+texture = ExtResource("3_portal")
+
+[node name="Interactable" type="Area2D" parent="Props/Portal"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_interactable")
+hint_text = "回到主通道"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Portal/Interactable"]
+position = Vector2(0, 20)
+shape = SubResource("Rect_portal_interact")
+
+[node name="Player" parent="." instance=ExtResource("4_player")]
+position = Vector2(1440, 1100)
+
+[node name="WakeUp" type="Node" parent="."]
+script = ExtResource("6_wakeup")

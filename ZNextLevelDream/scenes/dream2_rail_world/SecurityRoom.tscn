@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://4peml36xoeb8"]
+
+[ext_resource type="Script" uid="uid://7l3miewmb1hi" path="res://scenes/dream2_rail_world/SecurityRoom.gd" id="1_sec"]
+[ext_resource type="Texture2D" uid="uid://c5lssjju1u4nq" path="res://assets/art/backgrounds/bg_security_room.png" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://0kfimvx842m0" path="res://assets/art/props/door_white.png" id="3_door"]
+[ext_resource type="Texture2D" uid="uid://p8i7neofgoyi" path="res://assets/art/props/desk.png" id="4_desk"]
+[ext_resource type="Texture2D" uid="uid://brg0ujqj1oh21" path="res://assets/art/props/bed.png" id="5_bed"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="6_player"]
+[ext_resource type="Script" uid="uid://u2qohqnc32hp" path="res://scripts/Interactable.gd" id="7_interactable"]
+[ext_resource type="Texture2D" path="res://assets/art/props/pistol.png" id="8_pistol"]
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_top"]
+size = Vector2(1920, 470)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_left"]
+size = Vector2(10, 620)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_right"]
+size = Vector2(10, 620)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_bottom"]
+size = Vector2(1920, 10)
+
+[sub_resource type="RectangleShape2D" id="Rect_door_interact"]
+size = Vector2(220, 290)
+
+[sub_resource type="RectangleShape2D" id="Rect_desk_body"]
+size = Vector2(330, 100)
+
+[sub_resource type="RectangleShape2D" id="Rect_desk_interact"]
+size = Vector2(420, 260)
+
+[sub_resource type="RectangleShape2D" id="Rect_bed_interact"]
+size = Vector2(400, 320)
+
+[sub_resource type="RectangleShape2D" id="Rect_pistol_interact"]
+size = Vector2(220, 220)
+
+[node name="SecurityRoom" type="Node2D" unique_id=816788653]
+y_sort_enabled = true
+script = ExtResource("1_sec")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1209804175]
+texture = ExtResource("2_bg")
+centered = false
+
+[node name="Walls" type="StaticBody2D" parent="." unique_id=1615960496]
+collision_mask = 0
+
+[node name="WallTop" type="CollisionShape2D" parent="Walls" unique_id=1441282380]
+position = Vector2(960, 235)
+shape = SubResource("Rect_wall_top")
+
+[node name="WallLeft" type="CollisionShape2D" parent="Walls" unique_id=942941224]
+position = Vector2(5, 770)
+shape = SubResource("Rect_wall_left")
+
+[node name="WallRight" type="CollisionShape2D" parent="Walls" unique_id=859021501]
+position = Vector2(1915, 770)
+shape = SubResource("Rect_wall_right")
+
+[node name="WallBottom" type="CollisionShape2D" parent="Walls" unique_id=1314142432]
+position = Vector2(960, 1075)
+shape = SubResource("Rect_wall_bottom")
+
+[node name="Furniture" type="Node2D" parent="." unique_id=1628457479]
+y_sort_enabled = true
+
+[node name="Door" type="Node2D" parent="Furniture" unique_id=68427810]
+position = Vector2(1137, 350)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Door" unique_id=773823439]
+texture = ExtResource("3_door")
+
+[node name="Interactable" type="Area2D" parent="Furniture/Door" unique_id=139735160]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("7_interactable")
+hint_text = "走出保安室"
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Door/Interactable" unique_id=1473254206]
+position = Vector2(0, 30)
+shape = SubResource("Rect_door_interact")
+
+[node name="Desk" type="Node2D" parent="Furniture" unique_id=626337425]
+position = Vector2(1560, 600)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Desk" unique_id=1452304978]
+texture = ExtResource("4_desk")
+
+[node name="Body" type="StaticBody2D" parent="Furniture/Desk" unique_id=496438062]
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Desk/Body" unique_id=620803958]
+position = Vector2(0, 55)
+shape = SubResource("Rect_desk_body")
+
+[node name="Interactable" type="Area2D" parent="Furniture/Desk" unique_id=543935601]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("7_interactable")
+hint_text = "办公桌"
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Desk/Interactable" unique_id=1628988146]
+position = Vector2(0, 50)
+shape = SubResource("Rect_desk_interact")
+
+[node name="Bed" type="Node2D" parent="Furniture" unique_id=1516154799]
+position = Vector2(450, 560)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Bed" unique_id=1115320465]
+texture = ExtResource("5_bed")
+
+[node name="Body" type="StaticBody2D" parent="Furniture/Bed" unique_id=1817776968]
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Bed/Body" unique_id=598409004]
+position = Vector2(0, 80)
+shape = SubResource("Rect_desk_body")
+
+[node name="Interactable" type="Area2D" parent="Furniture/Bed" unique_id=1446022601]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("7_interactable")
+hint_text = "保安室的床"
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Bed/Interactable" unique_id=1316439452]
+position = Vector2(0, 40)
+shape = SubResource("Rect_bed_interact")
+
+[node name="Pistol" type="Node2D" parent="Furniture" unique_id=1935788324]
+position = Vector2(1620, 545)
+
+[node name="Sprite2D" type="Sprite2D" parent="Furniture/Pistol" unique_id=1963061545]
+texture = ExtResource("8_pistol")
+
+[node name="Interactable" type="Area2D" parent="Furniture/Pistol" unique_id=1972553188]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("7_interactable")
+hint_text = "抽屉里有一把手枪"
+
+[node name="Shape" type="CollisionShape2D" parent="Furniture/Pistol/Interactable" unique_id=1982046017]
+shape = SubResource("Rect_pistol_interact")
+
+[node name="Player" parent="." unique_id=773143681 instance=ExtResource("6_player")]
+position = Vector2(1230, 560)

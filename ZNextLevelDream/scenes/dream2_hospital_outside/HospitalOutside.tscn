@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://clnf8bveln7uy"]
+
+[ext_resource type="Script" uid="uid://05u3woxtkwbv" path="res://scenes/dream2_hospital_outside/HospitalOutside.gd" id="1_hout"]
+[ext_resource type="Texture2D" uid="uid://clcvrupdohgrf" path="res://assets/art/backgrounds/bg_hospital_outside.png" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://ok78dhwlmlc0" path="res://assets/art/props/ambulance.png" id="3_ambulance"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="4_player"]
+[ext_resource type="Script" uid="uid://u2qohqnc32hp" path="res://scripts/Interactable.gd" id="5_interactable"]
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_top"]
+size = Vector2(1920, 470)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_left"]
+size = Vector2(10, 620)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_right"]
+size = Vector2(10, 620)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_bottom"]
+size = Vector2(1920, 10)
+
+[sub_resource type="RectangleShape2D" id="Rect_entrance_interact"]
+size = Vector2(260, 220)
+
+[sub_resource type="RectangleShape2D" id="Rect_ambulance_interact"]
+size = Vector2(300, 260)
+
+[sub_resource type="RectangleShape2D" id="Rect_street_exit_interact"]
+size = Vector2(400, 220)
+
+[node name="HospitalOutside" type="Node2D" unique_id=428168167]
+y_sort_enabled = true
+script = ExtResource("1_hout")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1814031256]
+texture = ExtResource("2_bg")
+centered = false
+
+[node name="Walls" type="StaticBody2D" parent="." unique_id=247643457]
+collision_mask = 0
+
+[node name="WallTop" type="CollisionShape2D" parent="Walls" unique_id=1902777060]
+position = Vector2(960, 465)
+shape = SubResource("Rect_wall_top")
+
+[node name="WallLeft" type="CollisionShape2D" parent="Walls" unique_id=2048626049]
+position = Vector2(5, 770)
+shape = SubResource("Rect_wall_left")
+
+[node name="WallRight" type="CollisionShape2D" parent="Walls" unique_id=1111949003]
+position = Vector2(1915, 770)
+shape = SubResource("Rect_wall_right")
+
+[node name="WallBottom" type="CollisionShape2D" parent="Walls" unique_id=7326715]
+position = Vector2(960, 1075)
+shape = SubResource("Rect_wall_bottom")
+
+[node name="Props" type="Node2D" parent="." unique_id=2116470279]
+y_sort_enabled = true
+
+[node name="Entrance" type="Node2D" parent="Props" unique_id=448900209]
+position = Vector2(960, 600)
+
+[node name="Interactable" type="Area2D" parent="Props/Entrance" unique_id=7389055]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_interactable")
+hint_text = "进入医院"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Entrance/Interactable" unique_id=315568480]
+shape = SubResource("Rect_entrance_interact")
+
+[node name="Ambulance" type="Node2D" parent="Props" unique_id=695020306]
+position = Vector2(1450, 880)
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/Ambulance" unique_id=375379891]
+texture = ExtResource("3_ambulance")
+
+[node name="Interactable" type="Area2D" parent="Props/Ambulance" unique_id=718869655]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_interactable")
+hint_text = "救护车的后门开着"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Ambulance/Interactable" unique_id=1618831441]
+position = Vector2(0, 10)
+shape = SubResource("Rect_ambulance_interact")
+
+[node name="StreetExit" type="Node2D" parent="Props" unique_id=208370015]
+position = Vector2(186, 1030)
+
+[node name="Interactable" type="Area2D" parent="Props/StreetExit" unique_id=648547113]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_interactable")
+hint_text = "回大街"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/StreetExit/Interactable" unique_id=1597472956]
+shape = SubResource("Rect_street_exit_interact")
+
+[node name="Player" parent="." unique_id=109869760 instance=ExtResource("4_player")]
+position = Vector2(300, 860)

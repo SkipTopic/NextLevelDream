@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scenes/dream3_grass_world/Dream3GrassWorld.gd" id="1_grass"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/bg_grass_world.png" id="2_bg"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="3_player"]
+[ext_resource type="Texture2D" path="res://assets/art/props/house.png" id="4_house"]
+[ext_resource type="Texture2D" path="res://assets/art/props/fisherman.png" id="5_fisherman"]
+[ext_resource type="Script" path="res://scripts/Interactable.gd" id="6_interactable"]
+
+[sub_resource type="RectangleShape2D" id="Rect_house_body"]
+size = Vector2(360, 160)
+
+[sub_resource type="RectangleShape2D" id="Rect_house_interact"]
+size = Vector2(320, 260)
+
+[sub_resource type="RectangleShape2D" id="Rect_fisherman_interact"]
+size = Vector2(240, 280)
+
+[sub_resource type="RectangleShape2D" id="Rect_fisherman_body"]
+size = Vector2(70, 90)
+
+[node name="Dream3GrassWorld" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_grass")
+
+[node name="Background" type="Sprite2D" parent="."]
+centered = false
+texture = ExtResource("2_bg")
+
+[node name="Trees" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Props" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="House" type="Node2D" parent="Props"]
+position = Vector2(320, 760)
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/House"]
+texture = ExtResource("4_house")
+
+[node name="Body" type="StaticBody2D" parent="Props/House"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Props/House/Body"]
+position = Vector2(0, 170)
+shape = SubResource("Rect_house_body")
+
+[node name="Interactable" type="Area2D" parent="Props/House"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "进入房子"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/House/Interactable"]
+position = Vector2(0, 130)
+shape = SubResource("Rect_house_interact")
+
+[node name="Fisherman" type="Node2D" parent="Props"]
+position = Vector2(2620, 900)
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/Fisherman"]
+texture = ExtResource("5_fisherman")
+
+[node name="Body" type="StaticBody2D" parent="Props/Fisherman"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Fisherman/Body"]
+position = Vector2(0, 40)
+shape = SubResource("Rect_fisherman_body")
+
+[node name="Interactable" type="Area2D" parent="Props/Fisherman"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_interactable")
+hint_text = "钓鱼的人"
+
+[node name="Shape" type="CollisionShape2D" parent="Props/Fisherman/Interactable"]
+position = Vector2(0, 30)
+shape = SubResource("Rect_fisherman_interact")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(1440, 950)
