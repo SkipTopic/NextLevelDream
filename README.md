@@ -7,6 +7,15 @@
 
 一个可玩到第四层的梦境探索原型：现实卧室的床上闭眼，一层层往下潜；每深一层，回来的路就难一分。
 
+## 下载
+
+[Releases](../../releases) 页面有打好的两个平台构建，**当前版本 v1.0.0**：
+
+| 平台 | 文件 | 说明 |
+|---|---|---|
+| Windows | `NextLevelDream.exe` | 单文件（PCK 已内嵌），双击即玩，不用安装。未做代码签名，SmartScreen 可能拦一下：点「更多信息」→「仍要运行」 |
+| Android | `NextLevelDream.apk` | arm64-v8a，Android 7.0+（minSdk 24）；debug 证书签名，安装时需允许「未知来源」 |
+
 ---
 
 ## 四层梦境
